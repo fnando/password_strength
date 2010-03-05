@@ -17,8 +17,6 @@ new Test.Unit.Runner({
 		assertNotNull(strength.status);
 	}},
 
-
-
 	// Good strength
 	testGoodStrength: function() { with(this) {
 		strength.status = "good";
@@ -58,12 +56,6 @@ new Test.Unit.Runner({
 
 	// Password equals to username
 	testPasswordEqualsToUsername: function() { with(this) {
-	    // @strength.password = "johndoe"
-	    // @strength.test
-	    //
-	    // assert_equal 0, @strength.score
-	    // assert_equal :weak, @strength.status
-
 		strength.username = "johndoe";
 		strength.password = "johndoe";
 		strength.test();
@@ -74,12 +66,6 @@ new Test.Unit.Runner({
 
 	// Strong password
 	testStrongPassword: function() { with(this) {
-	    // @strength.password = "^P4ssw0rd$"
-	    // @strength.test
-	    //
-	    // assert_equal 100, @strength.score
-	    // assert_equal :strong, @strength.status
-
 		strength.password = "^P4ssw0rd$";
 		strength.test();
 

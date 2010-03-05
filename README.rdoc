@@ -75,7 +75,33 @@ The PasswordStrength also implements the algorithm in the JavaScript.
 
 The API is basically the same!
 
-Get the file: http://github.com/fnando/password_strength/raw/master/lib/password_strength.js
+Additionaly, a jQuery plugin is available.
+
+  $.strength("#username", "#password");
+
+The line above will validate the <tt>#password</tt> field against <tt>#username</tt>.
+The result will be an image to the respective strength status. By default the image path will be
+<tt>/images/weak.png</tt>, <tt>/images/good.png</tt> and <tt>/images/strong.png</tt>.
+
+You can overwrite the image path and the default callback.
+
+    $.strength.weakImage = "/weak.png";
+    $.strength.goodImage = "/good.png";
+    $.strength.strongImage = "/strong.png";
+    $.strength.callback = function(username, password, strength) {
+        // do whatever you want
+    };
+
+If you just want to overwrite the callback, you can simple do
+
+    $.strength("#username", "#password", function(username, password, strength){
+        // do whatever you want
+    });
+
+Get the files:
+
+* http://github.com/fnando/password_strength/raw/master/lib/password_strength.js
+* http://github.com/fnando/password_strength/raw/master/lib/jquery.strength.js
 
 = TO-DO
 
