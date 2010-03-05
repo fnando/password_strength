@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.files = [
     "CHANGELOG.rdoc",
      "README.rdoc",
+     "lib/password_strength.js",
      "lib/password_strength.rb",
      "lib/password_strength/active_record.rb",
      "lib/password_strength/active_record/ar2.rb",
@@ -34,6 +35,10 @@ Gem::Specification.new do |s|
      "lib/password_strength/base.rb",
      "lib/password_strength/version.rb",
      "test/active_record_test.rb",
+     "test/jsunittest/jsunittest.js",
+     "test/jsunittest/unittest.css",
+     "test/password_strength_test.html",
+     "test/password_strength_test.js",
      "test/password_strength_test.rb",
      "test/schema.rb",
      "test/test_helper.rb",
