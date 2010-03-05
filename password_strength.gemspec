@@ -25,7 +25,8 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = [
-    "README.rdoc",
+    "CHANGELOG.rdoc",
+     "README.rdoc",
      "lib/password_strength.rb",
      "lib/password_strength/active_record.rb",
      "lib/password_strength/active_record/ar2.rb",
@@ -43,6 +44,13 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{Check password strength against several rules. Includes ActiveRecord support.}
+  s.test_files = [
+    "test/active_record_test.rb",
+     "test/password_strength_test.rb",
+     "test/schema.rb",
+     "test/test_helper.rb",
+     "test/user.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
