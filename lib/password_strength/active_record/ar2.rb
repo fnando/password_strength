@@ -16,7 +16,7 @@ module PasswordStrength
     #
     def validates_strength_of(*attr_names)
       options = attr_names.extract_options!
-      options.reverse_merge!(:level => :good, :with => :username, :message => "is too weak")
+      options.reverse_merge!(:level => :good, :with => :username)
 
       raise ArgumentError, "The :with option must be supplied" unless options.include?(:with)
       raise ArgumentError, "The :level option must be one of [:weak, :good, :strong]" unless [:weak, :good, :strong].include?(options[:level])

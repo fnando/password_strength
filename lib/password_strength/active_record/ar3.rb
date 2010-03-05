@@ -2,7 +2,7 @@ module ActiveModel # :nodoc:
   module Validations # :nodoc:
     class StrengthValidator < EachValidator # :nodoc: all
       def initialize(options)
-        super(options.reverse_merge(:level => :good, :with => :username, :message => "is too weak"))
+        super(options.reverse_merge(:level => :good, :with => :username))
       end
 
       def validate_each(record, attribute, value)
