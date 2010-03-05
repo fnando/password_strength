@@ -1,8 +1,8 @@
 module PasswordStrength
   class Base
     MULTIPLE_NUMBERS_RE = /\d.*?\d.*?\d/
-    MULTIPLE_SYMBOLS_RE = /[!@#\$%^&*?_~].*?[!@#\$%^&*?_~]/
-    SYMBOL_RE = /[!@#\$%^&*?_~]/
+    MULTIPLE_SYMBOLS_RE = /[!@#\$%^&*?_~-].*?[!@#\$%^&*?_~-]/
+    SYMBOL_RE = /[!@#\$%^&*?_~-]/
     UPPERCASE_LOWERCASE_RE = /([a-z].*[A-Z])|([A-Z].*[a-z])/
 
     # Hold the username that will be matched against password

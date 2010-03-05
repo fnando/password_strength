@@ -63,10 +63,24 @@ If you want to compare your password against other field, you have to set the <t
 
 The available levels are: <tt>:weak</tt>, <tt>:good</tt> and <tt>:strong</tt>
 
+= JavaScript
+
+The PasswordStrength also implements the algorithm in the JavaScript.
+
+  var strength = PasswordStrength.test("johndoe", "mypass");
+  strength.isGood();
+  strength.isStrong();
+  strength.isWeak();
+  strength.isValid("good");
+
+The API is basically the same!
+
+Get the file: http://github.com/fnando/password_strength/raw/master/lib/password_strength.js
+
 = TO-DO
 
-* Implement JavaScript library
 * Detect repetitions
+* Rake task to get the latest JavaScript file
 
 = License
 
