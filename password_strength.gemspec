@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{password_strength}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
@@ -34,6 +34,8 @@ Gem::Specification.new do |s|
      "lib/password_strength/active_record/ar2.rb",
      "lib/password_strength/active_record/ar3.rb",
      "lib/password_strength/base.rb",
+     "lib/password_strength/locales/en.yml",
+     "lib/password_strength/locales/pt.yml",
      "lib/password_strength/version.rb",
      "test/active_record_test.rb",
      "test/jquery-1.4.2.js",
