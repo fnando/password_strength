@@ -71,4 +71,25 @@ new Test.Unit.Runner({
 		assertEqual(1, $("img.strong").length);
 		assertEqual("/images/strong.png", $("img.strength").attr("src"));
 	}},
+
+	// Missing username element: use selector as text
+	testMissingUsernameElementUseSelectorAsText: function() { with(this) {
+		$("#password").val("^P4ssw0rd$");
+		$.strength("root", "#password", function(username, password, strength){
+			assertEqual("root", strength.username);
+			assertEqual("^P4ssw0rd$", strength.password);
+		});
+
+		$("#password").trigger("keydown");
+	}},
+
+	// Missing password element: use selector as text
+	testMissingPasswordElementUseSelectorAsText: function() { with(this) {
+		$.strength("#username", "mypass", function(username, password, strength){
+			assertEqual("johndoe", strength.username);
+			assertEqual("mypass", strength.password);
+		});
+
+		$("#username").trigger("keydown");
+	}}
 });
