@@ -179,6 +179,12 @@ new Test.Unit.Runner({
     	assertEqual(-100, strength.scoreFor("password_size"));
 	}},
 
+	// Penalize repetitions
+	testPenalizeRepetitions: function() { with(this) {
+	    strength.password = "abcdabcdabcd";
+	    assertEqual(-36, strength.scoreFor("repetitions"));
+	}},
+
 	// Password length
 	testPasswordLength: function() { with(this) {
 		strength.password = "12345";
@@ -221,5 +227,18 @@ new Test.Unit.Runner({
     	assertEqual(15, strength.scoreFor("symbols_chars"));
 	}},
 
+	// Two char repetition
+	testTwoCharRepetition: function() { with(this) {
+		assertEqual(3, strength.repetitions("11221122", 2));
+	}},
 
+	// Three char repetition
+	testThreeCharRepetition: function() { with(this) {
+		assertEqual(3, strength.repetitions("123123123", 3));
+	}},
+
+	// Four char repetition
+	testFourCharRepetition: function() { with(this) {
+		assertEqual(4, strength.repetitions("abcdabcdabcd", 4));
+	}}
 });
