@@ -155,6 +155,14 @@ class TestPasswordStrength < Test::Unit::TestCase
     assert_equal -100, @strength.score_for(:password_size)
   end
 
+  def test_penalize_repetitions
+    # 2-chars: ab, bc, cd, da           (4 * 4 = 16)
+    # 3-chars: abc, bcd, cda, dab       (4 * 3 = 12)
+    # 4-chars: abcd, bcda, cdab, dabc   (4 * 2 =  8)
+    @strength.password = "abcdabcdabcd"
+    assert_equal -36, @strength.score_for(:repetitions)
+  end
+
   def test_password_length
     @strength.password = "12345"
     assert_equal 20, @strength.score_for(:password_size)
@@ -188,5 +196,20 @@ class TestPasswordStrength < Test::Unit::TestCase
   def test_password_with_symbols_and_chars
     @strength.password = "a$"
     assert_equal 15, @strength.score_for(:symbols_chars)
+  end
+
+  def test_two_chars_repetition
+    # expected: 11, 22, 12
+    assert_equal 3, @strength.repetitions("11221122", 2)
+  end
+
+  def test_three_chars_repetition
+    # expected: 123, 231, 312
+    assert_equal 3, @strength.repetitions("123123123", 3)
+  end
+
+  def test_four_chars_repetition
+    # expected: abcd, bcda, cdab, dabc
+    assert_equal 4, @strength.repetitions("abcdabcdabcd", 4)
   end
 end

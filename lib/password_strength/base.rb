@@ -98,8 +98,12 @@ module PasswordStrength
           score = -15 if password =~ /#{Regexp.escape(username)}/
         end
       when :sequences then
-        score = -15 * detect_sequences(password)
-        score += -15 * detect_sequences(password.to_s.reverse)
+        score = -15 * sequences(password)
+        score += -15 * sequences(password.to_s.reverse)
+      when :repetitions then
+        score += -(repetitions(password, 2) * 4)
+        score += -(repetitions(password, 3) * 3)
+        score += -(repetitions(password, 4) * 2)
       end
 
       score
@@ -118,6 +122,7 @@ module PasswordStrength
       @score += score_for(:only_numbers)
       @score += score_for(:username)
       @score += score_for(:sequences)
+      @score += score_for(:repetitions)
 
       @score = 0 if score < 0
       @score = 100 if score > 100
@@ -129,7 +134,25 @@ module PasswordStrength
       score
     end
 
-    def detect_sequences(text) # :nodoc:
+    def repetitions(text, size) # :nodoc:
+      count = 0
+      matches = []
+
+      0.upto(text.size - 1) do |i|
+        substring = text[i, size]
+
+        next if matches.include?(substring) || substring.size < size
+
+        matches << substring
+        occurrences = text.scan(substring).length
+
+        count += 1 if occurrences > 1
+      end
+
+      count
+    end
+
+    def sequences(text) # :nodoc:
       matches = 0
       sequence_size = 0
       bytes = []
