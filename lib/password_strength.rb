@@ -1,3 +1,4 @@
+require "active_support"
 require "password_strength/base"
 require "password_strength/active_record"
 

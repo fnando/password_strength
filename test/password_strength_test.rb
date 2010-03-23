@@ -212,4 +212,15 @@ class TestPasswordStrength < Test::Unit::TestCase
     # expected: abcd, bcda, cdab, dabc
     assert_equal 4, @strength.repetitions("abcdabcdabcd", 4)
   end
+
+  def test_special_chars_repetition
+    # expected: §§, ££, §£
+    assert_equal 3, @strength.repetitions("§§££§§££", 2)
+
+    # expected: §£€, £€§, €§£
+    assert_equal 3, @strength.repetitions("§£€§£€§£€", 3)
+
+    # expected: §£€à, £€à§, €à§£, à§£€
+    assert_equal 4, @strength.repetitions("§£€à§£€à§£€à", 4)
+  end
 end

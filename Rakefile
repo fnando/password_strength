@@ -47,6 +47,7 @@ Validates the strength of a password according to several rules:
 * sequences (123, abc, aaa)
 TXT
   gem.files =  FileList["{README,CHANGELOG}.rdoc", "{lib,test}/**/*"]
+  gem.add_dependency "activesupport"
 end
 
 Jeweler::GemcutterTasks.new

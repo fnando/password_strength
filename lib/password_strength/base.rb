@@ -135,6 +135,7 @@ module PasswordStrength
     end
 
     def repetitions(text, size) # :nodoc:
+      text = text.mb_chars
       count = 0
       matches = []
 
@@ -144,8 +145,7 @@ module PasswordStrength
         next if matches.include?(substring) || substring.size < size
 
         matches << substring
-        occurrences = text.scan(substring).length
-
+        occurrences = text.scan(/#{Regexp.escape(substring)}/).length
         count += 1 if occurrences > 1
       end
 
