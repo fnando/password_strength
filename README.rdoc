@@ -76,6 +76,11 @@ The PasswordStrength also implements the algorithm in the JavaScript.
 
 The API is basically the same!
 
+You can use the <tt>:exclude</tt> option. Only regular expressions are supported for now.
+
+  var strength = PasswordStrength.test("johndoe", "password with whitespaces", {exclude: /\s/});
+  strength.isInvalid();
+
 Additionaly, a jQuery plugin is available.
 
   $.strength("#username", "#password");

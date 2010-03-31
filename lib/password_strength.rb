@@ -10,8 +10,21 @@ module PasswordStrength
   #   strength.weak?
   #   #=> true
   #
-  def self.test(username, password)
-    strength = Base.new(username, password)
+  # You can provide an options hash.
+  #
+  #   strength = PasswordStrength.test("johndoe", "^Str0ng P4ssw0rd$", :exclude => /\s/)
+  #   strength.status
+  #   #=> :invalid
+  #
+  #   strength.invalid?
+  #   #=> true
+  #
+  # You can also provide an array.
+  #
+  #   strength = PasswordStrength.test("johndoe", "^Str0ng P4ssw0rd$", :exclude => [" ", "asdf", "123"])
+  #
+  def self.test(username, password, options = {})
+    strength = Base.new(username, password, options)
     strength.test
     strength
   end

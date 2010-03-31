@@ -91,5 +91,15 @@ new Test.Unit.Runner({
 		});
 
 		$("#username").trigger("keydown");
+	}},
+
+	// Exclude option as regular expression
+	testExcludeOption: function() { with(this) {
+    $.strength("#username", "password with whitespaces", {exclude: /\s/}, function(username, password, strength){
+      assertEqual("invalid", strength.status);
+      assert(strength.isInvalid());
+		});
+
+		$("#username").trigger("keydown");
 	}}
 });

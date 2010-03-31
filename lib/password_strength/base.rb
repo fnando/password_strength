@@ -5,34 +5,51 @@ module PasswordStrength
     SYMBOL_RE = /[!@#\$%^&*?_~-]/
     UPPERCASE_LOWERCASE_RE = /([a-z].*[A-Z])|([A-Z].*[a-z])/
 
-    # Hold the username that will be matched against password
+    # Hold the username that will be matched against password.
     attr_accessor :username
 
-    # The password that will be tested
+    # The password that will be tested.
     attr_accessor :password
 
-    # The score for the latest test. Will be nil if the password has not been tested.
+    # The score for the latest test. Will be +nil+ if the password has not been tested.
     attr_reader   :score
 
-    # The current test status. Can be +:weak+, +:good+ or +:strong+
+    # The current test status. Can be +:weak+, +:good+, +:strong+ or +:invalid+.
     attr_reader   :status
 
-    def initialize(username, password)
+    # Set what characters cannot be present on password.
+    # Can be a regular expression or array.
+    #
+    #   strength = PasswordStrength.test("john", "password with whitespaces", :exclude => [" ", "asdf"])
+    #   strength = PasswordStrength.test("john", "password with whitespaces", :exclude => /\s/)
+    #
+    # Then you can check the test result:
+    #
+    #   strength.valid?(:weak)
+    #   #=> false
+    #
+    #   strength.status
+    #   #=> :invalid
+    #
+    attr_accessor :exclude
+
+    def initialize(username, password, options = {})
       @username = username.to_s
       @password = password.to_s
       @score = 0
+      @exclude = options[:exclude]
     end
 
     # Check if the password has the specified score.
     # Level can be +:weak+, +:good+ or +:strong+.
-    def valid?(level)
+    def valid?(level = :good)
       case level
       when :strong then
         strong?
       when :good then
         good? || strong?
       else
-        true
+        !invalid?
       end
     end
 
@@ -49,6 +66,11 @@ module PasswordStrength
     # Check if the password has been detected as good.
     def good?
       status == :good
+    end
+
+    # Check if password has invalid characters based on PasswordStrength::Base#exclude.
+    def invalid?
+      status == :invalid
     end
 
     # Return the score for the specified rule.
@@ -109,29 +131,42 @@ module PasswordStrength
       score
     end
 
+    # Run all tests on password and return the final score.
     def test
       @score = 0
-      @score += score_for(:password_size)
-      @score += score_for(:numbers)
-      @score += score_for(:symbols)
-      @score += score_for(:uppercase_lowercase)
-      @score += score_for(:numbers_chars)
-      @score += score_for(:numbers_symbols)
-      @score += score_for(:symbols_chars)
-      @score += score_for(:only_chars)
-      @score += score_for(:only_numbers)
-      @score += score_for(:username)
-      @score += score_for(:sequences)
-      @score += score_for(:repetitions)
 
-      @score = 0 if score < 0
-      @score = 100 if score > 100
+      if contain_invalid_matches?
+        @status = :invalid
+      else
+        @score += score_for(:password_size)
+        @score += score_for(:numbers)
+        @score += score_for(:symbols)
+        @score += score_for(:uppercase_lowercase)
+        @score += score_for(:numbers_chars)
+        @score += score_for(:numbers_symbols)
+        @score += score_for(:symbols_chars)
+        @score += score_for(:only_chars)
+        @score += score_for(:only_numbers)
+        @score += score_for(:username)
+        @score += score_for(:sequences)
+        @score += score_for(:repetitions)
 
-      @status = :weak   if score < 35
-      @status = :good   if score >= 35 && score < 70
-      @status = :strong if score >= 70
+        @score = 0 if score < 0
+        @score = 100 if score > 100
+
+        @status = :weak   if score < 35
+        @status = :good   if score >= 35 && score < 70
+        @status = :strong if score >= 70
+      end
 
       score
+    end
+
+    def contain_invalid_matches? # :nodoc:
+      return false unless exclude
+      regex = exclude
+      regex = /#{exclude.collect {|i| Regexp.escape(i)}.join("|")}/ if exclude.kind_of?(Array)
+      password.to_s =~ regex
     end
 
     def repetitions(text, size) # :nodoc:

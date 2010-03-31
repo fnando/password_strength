@@ -66,4 +66,11 @@ class TestActiveRecord < Test::Unit::TestCase
     @user.update_attributes :password => "johndoe"
     assert @user.errors.full_messages.any?
   end
+
+  def test_exclude_option
+    User.validates_strength_of :password, :exclude => /\s/
+
+    @user.update_attributes :password => "^password with whitespaces 1234ASDF$"
+    assert @user.errors.full_messages.any?
+  end
 end

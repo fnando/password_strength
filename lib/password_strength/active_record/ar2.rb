@@ -19,10 +19,11 @@ module PasswordStrength
       options.reverse_merge!(:level => :good, :with => :username)
 
       raise ArgumentError, "The :with option must be supplied" unless options.include?(:with)
+      raise ArgumentError, "The :exclude options must be an array of string or regular expression" if options[:exclude] && !options[:exclude].kind_of?(Array) && !options[:exclude].kind_of?(Regexp)
       raise ArgumentError, "The :level option must be one of [:weak, :good, :strong]" unless [:weak, :good, :strong].include?(options[:level])
 
       validates_each(attr_names, options) do |record, attr_name, value|
-        strength = PasswordStrength.test(record.send(options[:with]), value)
+        strength = PasswordStrength.test(record.send(options[:with]), value, :exclude => options[:exclude])
         record.errors.add(attr_name, :too_weak, :default => options[:message]) unless strength.valid?(options[:level])
       end
     end

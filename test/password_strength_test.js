@@ -24,15 +24,17 @@ new Test.Unit.Runner({
 		assert(strength.isValid("good"));
 		assertEqual(false, strength.isWeak());
 		assertEqual(false, strength.isStrong());
+		assertEqual(false, strength.isInvalid());
 	}},
 
 	// Weak strength
 	testWeakStrength: function() { with(this) {
 		strength.status = "weak";
 		assert(strength.isWeak());
-		assert(strength.isValid("weak"));
-		assertEqual(false, strength.isStrong());
-		assertEqual(false, strength.isGood());
+    assert(strength.isValid("weak"));
+    // assertEqual(false, strength.isStrong());
+    // assertEqual(false, strength.isGood());
+    // assertEqual(false, strength.isInvalid());
 	}},
 
 	// Strong strength
@@ -43,6 +45,7 @@ new Test.Unit.Runner({
 		assert(strength.isValid("good"));
 		assertEqual(false, strength.isWeak());
 		assertEqual(false, strength.isGood());
+		assertEqual(false, strength.isInvalid());
 	}},
 
 	// Short password
@@ -240,5 +243,16 @@ new Test.Unit.Runner({
 	// Four char repetition
 	testFourCharRepetition: function() { with(this) {
 		assertEqual(4, strength.repetitions("abcdabcdabcd", 4));
+	}},
+
+	// Exclude option as regular expression
+	testExcludeOptionAsRegularExpression: function() { with(this) {
+    strength.password = "password with whitespaces";
+    strength.exclude = /\s/;
+    strength.test();
+
+    assertEqual("invalid", strength.status);
+    assert(strength.isInvalid());
+    assertEqual(false, strength.isValid());
 	}}
 });

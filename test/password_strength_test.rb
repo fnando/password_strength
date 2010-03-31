@@ -223,4 +223,18 @@ class TestPasswordStrength < Test::Unit::TestCase
     # expected: §£€à, £€à§, €à§£, à§£€
     assert_equal 4, @strength.repetitions("§£€à§£€à§£€à", 4)
   end
+
+  def test_exclude_option_as_regular_expression
+    @strength = PasswordStrength.test("johndoe", "^Str0ng P4ssw0rd$", :exclude => /\s/)
+    assert_equal :invalid, @strength.status
+    assert @strength.invalid?
+    assert_equal false, @strength.valid?
+  end
+
+  def test_exclude_option_as_array
+    @strength = PasswordStrength.test("johndoe", "asdfasdfasdf", :exclude => ["asdf", "123"])
+    assert_equal :invalid, @strength.status
+    assert @strength.invalid?
+    assert_equal false, @strength.valid?
+  end
 end
