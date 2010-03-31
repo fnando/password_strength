@@ -20,3 +20,12 @@
 
 * jQuery function can accept string instead of selectors
 * Added repetition penalization
+
+== 0.1.5 - March 23 2010
+
+* Added ActiveSupport as dependency
+* Added JavaScript implementation for JavaScript
+
+== 0.1.6 - March 31 2010
+
+* Added :exclude option
