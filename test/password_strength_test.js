@@ -31,10 +31,10 @@ new Test.Unit.Runner({
 	testWeakStrength: function() { with(this) {
 		strength.status = "weak";
 		assert(strength.isWeak());
-    assert(strength.isValid("weak"));
-    // assertEqual(false, strength.isStrong());
-    // assertEqual(false, strength.isGood());
-    // assertEqual(false, strength.isInvalid());
+    	assert(strength.isValid("weak"));
+	    assertEqual(false, strength.isStrong());
+	    assertEqual(false, strength.isGood());
+	    assertEqual(false, strength.isInvalid());
 	}},
 
 	// Strong strength
@@ -247,12 +247,12 @@ new Test.Unit.Runner({
 
 	// Exclude option as regular expression
 	testExcludeOptionAsRegularExpression: function() { with(this) {
-    strength.password = "password with whitespaces";
-    strength.exclude = /\s/;
-    strength.test();
+	    strength.password = "password with whitespaces";
+	    strength.exclude = /\s/;
+	    strength.test();
 
-    assertEqual("invalid", strength.status);
-    assert(strength.isInvalid());
-    assertEqual(false, strength.isValid());
+	    assertEqual("invalid", strength.status);
+	    assert(strength.isInvalid());
+	    assertEqual(false, strength.isValid());
 	}}
 });
