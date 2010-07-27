@@ -7,7 +7,7 @@ module ActiveModel # :nodoc:
 
       def validate_each(record, attribute, value)
         strength = PasswordStrength.test(record.send(options[:with]), value, :exclude => options[:exclude])
-        record.errors.add(attribute, :too_weak, options) unless strength.valid?(options[:level])
+        record.errors.add(attribute, :too_weak, options) unless PasswordStrength.enabled && strength.valid?(options[:level])
       end
 
       def check_validity!

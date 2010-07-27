@@ -28,4 +28,13 @@ module PasswordStrength
     strength.test
     strength
   end
+
+  class << self
+    # You can disable PasswordStrength without having to change a single line of code. This is
+    # specially great on development environment.
+    attr_accessor :enabled
+  end
+
+  # Enable verification by default.
+  self.enabled = true
 end

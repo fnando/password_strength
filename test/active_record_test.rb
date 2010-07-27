@@ -2,6 +2,7 @@ require "test_helper"
 
 class TestActiveRecord < Test::Unit::TestCase
   def setup
+    PasswordStrength.enabled = true
     Object.class_eval { remove_const("User") } if defined?(User)
     load "user.rb"
     @user = User.new
@@ -72,5 +73,11 @@ class TestActiveRecord < Test::Unit::TestCase
 
     @user.update_attributes :password => "^password with whitespaces 1234ASDF$"
     assert @user.errors.full_messages.any?
+  end
+
+  def test_ignore_validations_when_password_strength_is_disabled
+    PasswordStrength.enabled = false
+    @user.update_attributes :password => ""
+    assert @user.valid?
   end
 end
