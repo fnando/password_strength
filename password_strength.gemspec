@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{password_strength}
-  s.version = "0.1.6"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2010-03-31}
+  s.date = %q{2010-07-27}
   s.description = %q{Validates the strength of a password according to several rules:
 
 * size
@@ -27,16 +27,16 @@ Gem::Specification.new do |s|
   s.files = [
     "CHANGELOG.rdoc",
      "README.rdoc",
-     "lib/jquery.strength.js",
-     "lib/password_strength.js",
+     "javascripts/jquery.strength.js",
+     "javascripts/password_strength.js",
      "lib/password_strength.rb",
      "lib/password_strength/active_record.rb",
      "lib/password_strength/active_record/ar2.rb",
      "lib/password_strength/active_record/ar3.rb",
      "lib/password_strength/base.rb",
-     "lib/password_strength/locales/en.yml",
-     "lib/password_strength/locales/pt.yml",
      "lib/password_strength/version.rb",
+     "locales/en.yml",
+     "locales/pt.yml",
      "test/active_record_test.rb",
      "test/jquery-1.4.2.js",
      "test/jquery_strength_test.html",
@@ -53,7 +53,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/fnando/password_strength}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.6}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{Check password strength against several rules. Includes ActiveRecord support.}
   s.test_files = [
     "test/active_record_test.rb",
@@ -68,12 +68,12 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activesupport>, [">= 0"])
+      s.add_runtime_dependency(%q<activesupport>, [">= 2.3.5"])
     else
-      s.add_dependency(%q<activesupport>, [">= 0"])
+      s.add_dependency(%q<activesupport>, [">= 2.3.5"])
     end
   else
-    s.add_dependency(%q<activesupport>, [">= 0"])
+    s.add_dependency(%q<activesupport>, [">= 2.3.5"])
   end
 end
 
