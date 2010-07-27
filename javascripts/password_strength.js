@@ -13,40 +13,40 @@ var PasswordStrength = function() {
 		this.score = 0;
 
 		if (this.containInvalidMatches()) {
-      this.status = "invalid";
+			this.status = "invalid";
 		} else {
-		  this.score += this.scoreFor("password_size");
-  		this.score += this.scoreFor("numbers");
-  		this.score += this.scoreFor("symbols");
-  		this.score += this.scoreFor("uppercase_lowercase");
-  		this.score += this.scoreFor("numbers_chars");
-  		this.score += this.scoreFor("numbers_symbols");
-  		this.score += this.scoreFor("symbols_chars");
-  		this.score += this.scoreFor("only_chars");
-  		this.score += this.scoreFor("only_numbers");
-  		this.score += this.scoreFor("username");
-  		this.score += this.scoreFor("sequences");
-  		this.score += this.scoreFor("repetitions");
+			this.score += this.scoreFor("password_size");
+			this.score += this.scoreFor("numbers");
+			this.score += this.scoreFor("symbols");
+			this.score += this.scoreFor("uppercase_lowercase");
+			this.score += this.scoreFor("numbers_chars");
+			this.score += this.scoreFor("numbers_symbols");
+			this.score += this.scoreFor("symbols_chars");
+			this.score += this.scoreFor("only_chars");
+			this.score += this.scoreFor("only_numbers");
+			this.score += this.scoreFor("username");
+			this.score += this.scoreFor("sequences");
+			this.score += this.scoreFor("repetitions");
 
-  		if (this.score < 0) {
-  			this.score = 0;
-  		}
+			if (this.score < 0) {
+				this.score = 0;
+			}
 
-  		if (this.score > 100) {
-  			this.score = 100;
-  		}
+			if (this.score > 100) {
+				this.score = 100;
+			}
 
-  		if (this.score < 35) {
-  			this.status = "weak";
-  		}
+			if (this.score < 35) {
+				this.status = "weak";
+			}
 
-  		if (this.score >= 35 && this.score < 70) {
-  			this.status = "good";
-  		}
+			if (this.score >= 35 && this.score < 70) {
+				this.status = "good";
+			}
 
-  		if (this.score >= 70) {
-  			this.status = "strong";
-  		}
+			if (this.score >= 70) {
+				this.status = "strong";
+			}
 		}
 
 		return this.score;
@@ -162,15 +162,15 @@ var PasswordStrength = function() {
 	};
 
 	this.containInvalidMatches = function() {
-	  if (!this.exclude) {
-	    return false;
-	  }
+		if (!this.exclude) {
+			return false;
+		}
 
-    if (!this.exclude.test) {
-      return false;
-    }
+		if (!this.exclude.test) {
+			return false;
+		}
 
-    return this.exclude.test(this.password.toString());
+		return this.exclude.test(this.password.toString());
 	};
 
 	this.sequences = function(text) {

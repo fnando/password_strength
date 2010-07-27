@@ -1,11 +1,11 @@
 (function($){
 	$.strength = function(username, password, options, callback) {
-	  if (typeof(options) == "function") {
-	    callback = options;
-	    options = {};
-	  } else if (!options) {
-	    options = {};
-	  }
+		if (typeof(options) == "function") {
+			callback = options;
+			options = {};
+		} else if (!options) {
+			options = {};
+		}
 
 		var usernameField = $(username);
 		var passwordField = $(password);
