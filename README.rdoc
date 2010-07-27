@@ -106,8 +106,8 @@ If you just want to overwrite the callback, you can simple do
 
 Get the files:
 
-* http://github.com/fnando/password_strength/raw/master/lib/password_strength.js
-* http://github.com/fnando/password_strength/raw/master/lib/jquery.strength.js
+* http://github.com/fnando/password_strength/raw/master/javascripts/password_strength.js
+* http://github.com/fnando/password_strength/raw/master/javascripts/jquery.strength.js
 
 = TO-DO
 

@@ -1,7 +1,6 @@
-require "jeweler"
 require "rcov/rcovtask"
 require "rake/testtask"
-require "hanna/rdoctask"
+require "rake/rdoctask"
 require "lib/password_strength/version"
 
 Rcov::RcovTask.new do |t|
@@ -14,7 +13,8 @@ Rcov::RcovTask.new do |t|
 end
 
 Rake::TestTask.new do |t|
-  t.libs << "test"
+  t.libs += %w[test lib]
+  t.ruby_opts = %w[-rubygems]
   t.test_files = FileList["test/**/*_test.rb"]
   t.verbose = true
 end
@@ -28,14 +28,17 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include("lib/**/*.rb")
 end
 
-JEWEL = Jeweler::Tasks.new do |gem|
-  gem.name = "password_strength"
-  gem.email = "fnando.vieira@gmail.com"
-  gem.homepage = "http://github.com/fnando/password_strength"
-  gem.authors = ["Nando Vieira"]
-  gem.version = PasswordStrength::Version::STRING
-  gem.summary = "Check password strength against several rules. Includes ActiveRecord support."
-  gem.description = <<-TXT
+begin
+  require "jeweler"
+
+  JEWEL = Jeweler::Tasks.new do |gem|
+    gem.name = "password_strength"
+    gem.email = "fnando.vieira@gmail.com"
+    gem.homepage = "http://github.com/fnando/password_strength"
+    gem.authors = ["Nando Vieira"]
+    gem.version = PasswordStrength::Version::STRING
+    gem.summary = "Check password strength against several rules. Includes ActiveRecord support."
+    gem.description = <<-TXT
 Validates the strength of a password according to several rules:
 
 * size
@@ -45,9 +48,12 @@ Validates the strength of a password according to several rules:
 * combination of numbers, letters and symbols
 * password contains username
 * sequences (123, abc, aaa)
-TXT
-  gem.files =  FileList["{README,CHANGELOG}.rdoc", "{lib,test}/**/*"]
-  gem.add_dependency "activesupport"
-end
+  TXT
+    gem.files =  FileList["{README,CHANGELOG}.rdoc", "{lib,test,javascripts,locales}/**/*"]
+    gem.add_dependency "activesupport", ">= 2.3.5"
+  end
 
-Jeweler::GemcutterTasks.new
+  Jeweler::GemcutterTasks.new
+rescue LoadError
+  puts "[JEWELER] You need to install Jeweler - `gem install jeweler` - to build this gem"
+end

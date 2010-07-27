@@ -24,7 +24,7 @@ module PasswordStrength
 
       validates_each(attr_names, options) do |record, attr_name, value|
         strength = PasswordStrength.test(record.send(options[:with]), value, :exclude => options[:exclude])
-        record.errors.add(attr_name, :too_weak, :default => options[:message]) unless strength.valid?(options[:level])
+        record.errors.add(attr_name, :too_weak, options) unless strength.valid?(options[:level])
       end
     end
   end
