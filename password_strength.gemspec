@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{password_strength}
-  s.version = "0.2.0"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2010-07-27}
+  s.date = %q{2010-08-11}
   s.description = %q{Validates the strength of a password according to several rules:
 
 * size
@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
      "lib/password_strength/active_record/ar2.rb",
      "lib/password_strength/active_record/ar3.rb",
      "lib/password_strength/base.rb",
+     "lib/password_strength/validators/windows2008.rb",
      "lib/password_strength/version.rb",
      "locales/en.yml",
      "locales/pt.yml",
@@ -48,7 +49,8 @@ Gem::Specification.new do |s|
      "test/password_strength_test.rb",
      "test/schema.rb",
      "test/test_helper.rb",
-     "test/user.rb"
+     "test/user.rb",
+     "test/validators/windows2008_test.rb"
   ]
   s.homepage = %q{http://github.com/fnando/password_strength}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -60,7 +62,8 @@ Gem::Specification.new do |s|
      "test/password_strength_test.rb",
      "test/schema.rb",
      "test/test_helper.rb",
-     "test/user.rb"
+     "test/user.rb",
+     "test/validators/windows2008_test.rb"
   ]
 
   if s.respond_to? :specification_version then
