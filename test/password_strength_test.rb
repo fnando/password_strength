@@ -164,8 +164,8 @@ class TestPasswordStrength < Test::Unit::TestCase
   end
 
   def test_password_length
-    @strength.password = "12345"
-    assert_equal 20, @strength.score_for(:password_size)
+    @strength.password = "123456"
+    assert_equal 24, @strength.score_for(:password_size)
   end
 
   def test_password_with_numbers

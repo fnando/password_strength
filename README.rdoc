@@ -64,6 +64,30 @@ If you want to compare your password against other field, you have to set the <t
 
 The available levels are: <tt>:weak</tt>, <tt>:good</tt> and <tt>:strong</tt>
 
+You can also provide a custom class/module that will test that password.
+
+  validates_strength_of :password, :using => CustomPasswordTester
+
+Your +CustomPasswordTester+ class should override the default implementation. In practice, you're
+going to override only the +test+ method that must call one of the following methods:
+<tt>invalid!</tt>, <tt>weak!</tt>, <tt>good!</tt> or <tt>strong!</tt>.
+
+  class CustomPasswordTester < PasswordStrength::Base
+    def test
+      if password != "mypass"
+        invalid!
+      else
+        strong!
+      end
+    end
+  end
+
+The tester above will accept only +mypass+ as password.
+
+PasswordStrength implements two validators: <tt>PasswordStrength::Base</tt> and <tt>PasswordStrength::Validators::Windows2008</tt>.
+
+<b>ATTENTION:</b> Custom validators are not supported by JavaScript yet!
+
 = JavaScript
 
 The PasswordStrength also implements the algorithm in the JavaScript.

@@ -1,6 +1,7 @@
 require "active_support"
 require "password_strength/base"
 require "password_strength/active_record"
+require "password_strength/validators/windows2008"
 
 module PasswordStrength
   # Test the password strength by applying several rules.

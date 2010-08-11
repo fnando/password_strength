@@ -4,6 +4,10 @@ module PasswordStrength
     MULTIPLE_SYMBOLS_RE = /[!@#\$%^&*?_~-].*?[!@#\$%^&*?_~-]/
     SYMBOL_RE = /[!@#\$%^&*?_~-]/
     UPPERCASE_LOWERCASE_RE = /([a-z].*[A-Z])|([A-Z].*[a-z])/
+    INVALID = :invalid
+    WEAK = :weak
+    STRONG = :strong
+    GOOD = :good
 
     # Hold the username that will be matched against password.
     attr_accessor :username
@@ -42,11 +46,11 @@ module PasswordStrength
 
     # Check if the password has the specified score.
     # Level can be +:weak+, +:good+ or +:strong+.
-    def valid?(level = :good)
+    def valid?(level = GOOD)
       case level
-      when :strong then
+      when STRONG then
         strong?
-      when :good then
+      when GOOD then
         good? || strong?
       else
         !invalid?
@@ -55,22 +59,42 @@ module PasswordStrength
 
     # Check if the password has been detected as strong.
     def strong?
-      status == :strong
+      status == STRONG
+    end
+
+    # Mark password as strong.
+    def strong!
+      @status = STRONG
     end
 
     # Check if the password has been detected as weak.
     def weak?
-      status == :weak
+      status == WEAK
+    end
+
+    # Mark password as weak.
+    def weak!
+      @status = WEAK
     end
 
     # Check if the password has been detected as good.
     def good?
-      status == :good
+      status == GOOD
+    end
+
+    # Mark password as good.
+    def good!
+      @status = GOOD
     end
 
     # Check if password has invalid characters based on PasswordStrength::Base#exclude.
     def invalid?
-      status == :invalid
+      status == INVALID
+    end
+
+    # Mark password as invalid.
+    def invalid!
+      @status = INVALID
     end
 
     # Return the score for the specified rule.
@@ -92,7 +116,7 @@ module PasswordStrength
 
       case name
       when :password_size then
-        if password.size < 4
+        if password.size < 6
           score = -100
         else
           score = password.size * 4
@@ -136,7 +160,7 @@ module PasswordStrength
       @score = 0
 
       if contain_invalid_matches?
-        @status = :invalid
+        invalid!
       else
         @score += score_for(:password_size)
         @score += score_for(:numbers)
@@ -154,9 +178,9 @@ module PasswordStrength
         @score = 0 if score < 0
         @score = 100 if score > 100
 
-        @status = :weak   if score < 35
-        @status = :good   if score >= 35 && score < 70
-        @status = :strong if score >= 70
+        weak!   if score < 35
+        good!   if score >= 35 && score < 70
+        strong! if score >= 70
       end
 
       score
