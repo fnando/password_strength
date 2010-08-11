@@ -29,3 +29,13 @@
 == 0.1.6 - March 31 2010
 
 * Added :exclude option
+
+== 0.2.0 - July 27 2010
+
+* PasswordStrength can be disabled; development mode says hello!
+
+== 0.3.0 - August 11 2010
+
+* Increased required password length to 6 characters
+* Added support for custom validators
+* Added Windows 2008 validator
