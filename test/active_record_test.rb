@@ -76,6 +76,7 @@ class TestActiveRecord < Test::Unit::TestCase
   end
 
   def test_ignore_validations_when_password_strength_is_disabled
+    User.validates_strength_of :password
     PasswordStrength.enabled = false
     @user.update_attributes :password => ""
     assert @user.valid?

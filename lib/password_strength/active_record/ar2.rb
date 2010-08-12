@@ -45,9 +45,11 @@ module PasswordStrength
       raise ArgumentError, "The :level option must be one of [:weak, :good, :strong]" unless [:weak, :good, :strong].include?(options[:level])
 
       validates_each(attr_names, options) do |record, attr_name, value|
+        next unless PasswordStrength.enabled
+
         strength = options[:using].new(record.send(options[:with]), value, :exclude => options[:exclude])
         strength.test
-        record.errors.add(attr_name, :too_weak, options) unless PasswordStrength.enabled && strength.valid?(options[:level])
+        record.errors.add(attr_name, :too_weak, options) unless strength.valid?(options[:level])
       end
     end
   end
