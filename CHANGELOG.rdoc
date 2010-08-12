@@ -39,3 +39,7 @@
 * Increased required password length to 6 characters
 * Added support for custom validators
 * Added Windows 2008 validator
+
+== 0.3.1 - August 12 2010
+
+* The enabled option was ignored in some cases.
