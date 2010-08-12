@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{password_strength}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2010-08-11}
+  s.date = %q{2010-08-12}
   s.description = %q{Validates the strength of a password according to several rules:
 
 * size
