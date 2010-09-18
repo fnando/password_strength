@@ -1,6 +1,6 @@
 pt: &pt
-  activerecord: &ERRORS
-    errors:
+  activerecord:
+    errors: &ERRORS
       messages:
         too_weak: "não é segura; utilize letras (maiúsculas e mínusculas), números e caracteres especiais"
 
