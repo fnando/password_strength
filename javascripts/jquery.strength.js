@@ -12,7 +12,8 @@
 		var strength = new PasswordStrength();
 
 		strength.exclude = options["exclude"];
-
+		strength.options = options;
+		
 		callback = callback || $.strength.callback;
 
 		var handler = function(){
@@ -27,7 +28,7 @@
 			if ($(passwordField).length == 0) {
 				strength.password = password;
 			}
-
+			
 			strength.test();
 			callback(usernameField, passwordField, strength);
 		};

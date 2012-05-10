@@ -6,6 +6,8 @@ var PasswordStrength = function() {
 
 	this.username = null;
 	this.password = null;
+	this.options = null;
+	this.min_password_len = 4;	
 	this.score = 0;
 	this.status = null;
 
@@ -15,6 +17,9 @@ var PasswordStrength = function() {
 		if (this.containInvalidMatches()) {
 			this.status = "invalid";
 		} else {
+			
+			if (this.options.min_password_len != null) this.min_password_len = this.options.min_password_len;
+			
 			this.score += this.scoreFor("password_size");
 			this.score += this.scoreFor("numbers");
 			this.score += this.scoreFor("symbols");
@@ -57,47 +62,67 @@ var PasswordStrength = function() {
 
 		switch (name) {
 			case "password_size":
-				if (this.password.length < 4) {
+				if (this.password.length < this.min_password_len) {
 					score = -100;
 				} else {
-					score = this.password.length * 4;
+					score = this.password.length * this.min_password_len;
 				}
 				break;
 
 			case "numbers":
 				if (this.password.match(MULTIPLE_NUMBERS_RE)) {
 					score = 5;
+				} else {
+					if (this.options.force_numbers != null && this.options.force_numbers === true)
+						score = -50;
 				}
 				break;
 
 			case "symbols":
 				if (this.password.match(MULTIPLE_SYMBOLS_RE)) {
 					score = 5;
+				} else {
+					if (this.options.force_symbols != null && this.options.force_symbols === true)
+						score = -50;
 				}
 				break;
 
 			case "uppercase_lowercase":
 				if (this.password.match(UPPERCASE_LOWERCASE_RE)) {
 					score = 10;
+				} else {
+					if (this.options.force_mixed_case != null && this.options.force_mixed_case === true)
+						score = -50;
 				}
 				break;
 
 			case "numbers_chars":
 				if (this.password.match(/[a-z]/i) && this.password.match(/[0-9]/)) {
 					score = 15;
+				} else {
+					if (this.options.force_numbers != null && this.options.force_numbers === true)
+						score = -50;
 				}
 				break;
 
 			case "numbers_symbols":
 				if (this.password.match(/[0-9]/) && this.password.match(SYMBOL_RE)) {
 					score = 15;
+				} else {
+					if ((this.options.force_numbers != null && this.options.force_numbers === true) || 
+					 (this.options.force_symbols != null && this.options.force_symbols === true))
+						score = -50;
 				}
 				break;
 
 			case "symbols_chars":
 				if (this.password.match(/[a-z]/i) && this.password.match(SYMBOL_RE)) {
 					score = 15;
+				} else {
+					if (this.options.force_symbols != null && this.options.force_symbols === true)
+						score = -50;
 				}
+				
 				break;
 
 			case "only_chars":
@@ -113,10 +138,22 @@ var PasswordStrength = function() {
 				break;
 
 			case "username":
-				if (this.password == this.username) {
-					score = -100;
-				} else if (this.password.indexOf(this.username) != -1) {
-					score = -15;
+				if ((this.options.use_username == null) || (this.options.use_username != null && this.options.use_username === true)) {
+					if (this.password == this.username) {
+						score = -100;
+					} else if (this.password.indexOf(this.username) != -1) {
+						score = -15;
+					}
+				}
+				break;
+
+			case "email":
+				if ((this.options.use_email == null) || (this.options.use_email != null && this.options.use_email === true)) {
+					if (this.password == this.email) {
+						score = -100;
+					} else if (this.password.indexOf(this.email) != -1) {
+						score = -15;
+					}
 				}
 				break;
 
