@@ -1,5 +1,5 @@
 (function($){
-	$.strength = function(username, password, options, callback) {
+	$.strength = function(username, password, options, callback, email) {
 		if (typeof(options) == "function") {
 			callback = options;
 			options = {};
@@ -9,10 +9,12 @@
 
 		var usernameField = $(username);
 		var passwordField = $(password);
+		var emailField = $(email);
 		var strength = new PasswordStrength();
 
 		strength.exclude = options["exclude"];
-
+		strength.options = options;
+		
 		callback = callback || $.strength.callback;
 
 		var handler = function(){
@@ -27,7 +29,13 @@
 			if ($(passwordField).length == 0) {
 				strength.password = password;
 			}
+			
+			strength.email = $(emailField).val();
 
+			if ($(emailField).length == 0) {
+				strength.email = email;
+			}
+			
 			strength.test();
 			callback(usernameField, passwordField, strength);
 		};
