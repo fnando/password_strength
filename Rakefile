@@ -1,6 +1,6 @@
 require "rake/testtask"
 require "rdoc/task"
-require "lib/password_strength/version"
+# require "password_strength/version"
 
 Rake::TestTask.new do |t|
   t.libs += %w[test lib]
