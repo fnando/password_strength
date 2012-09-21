@@ -1,6 +1,13 @@
 # -*- encoding: utf-8 -*-
 require "test_helper"
 
+class PasswordStrengthTester < PasswordStrength::Base
+  def test
+    record.username = 'bar'
+    good!
+  end
+end
+
 class TestActiveRecord < Test::Unit::TestCase
   def setup
     PasswordStrength.enabled = true
@@ -81,5 +88,15 @@ class TestActiveRecord < Test::Unit::TestCase
     PasswordStrength.enabled = false
     @user.update_attributes :password => ""
     assert @user.valid?
+  end
+
+  def test_record_access_from_validator
+    User.validates_strength_of :password, :using => PasswordStrengthTester
+    @user.username = 'foo'
+    @user.password = 'foo'
+
+    assert @user.username, 'foo'
+    @user.valid?
+    assert @user.username, 'bar'
   end
 end
