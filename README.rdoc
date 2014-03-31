@@ -10,6 +10,7 @@ Validates the strength of a password according to several rules:
 * password contains username
 * sequences (123, abc, aaa)
 * repetitions
+* can't be a common password (view list at support/common.txt)
 
 Some results:
 
@@ -21,7 +22,11 @@ Some results:
 
 = Install
 
-  sudo gem install password_strength
+  gem install password_strength
+
+or put this in your Gemfile:
+
+  gem "password_strength"
 
 If you want the source go to http://github.com/fnando/password_strength
 
@@ -50,7 +55,7 @@ If you want the source go to http://github.com/fnando/password_strength
 
 = ActiveRecord
 
-The PasswordStrength library comes with ActiveRecord support (tested on AR 2.3.5 and 3.0.0-beta).
+The PasswordStrength library comes with ActiveRecord support.
 
   class Person < ActiveRecord::Base
     validates_strength_of :password
@@ -141,7 +146,7 @@ Get the files:
 
 (The MIT License)
 
-Copyright © 2010:
+Copyright © 2010-2014:
 
 * Nando Vieira (http://simplesideias.com.br)
 

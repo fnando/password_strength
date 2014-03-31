@@ -37,6 +37,25 @@ module PasswordStrength
     #
     attr_accessor :exclude
 
+    # Return an array of strings that represents
+    # common passwords. The default list is taken
+    # from several online sources (just Google for 'most common passwords').
+    #
+    # Notable sources:
+    #
+    # * http://www.whatsmypass.com/the-top-500-worst-passwords-of-all-time
+    # * http://elementdesignllc.com/2009/12/twitters-most-common-passwords/
+    #
+    # The current list has 3.6KB and its load into memory just once.
+    def self.common_words
+      @common_words ||= begin
+        file = File.open(File.expand_path("../../../support/common.txt", __FILE__))
+        words = file.each_line.to_a.map(&:chomp)
+        file.close
+        words
+      end
+    end
+
     def initialize(username, password, options = {})
       @username = username.to_s
       @password = password.to_s
@@ -161,6 +180,8 @@ module PasswordStrength
 
       if contain_invalid_matches?
         invalid!
+      elsif common_word?
+        invalid!
       else
         @score += score_for(:password_size)
         @score += score_for(:numbers)
@@ -184,6 +205,10 @@ module PasswordStrength
       end
 
       score
+    end
+
+    def common_word? # :nodoc:
+      self.class.common_words.include?(password.downcase)
     end
 
     def contain_invalid_matches? # :nodoc:

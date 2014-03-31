@@ -17,16 +17,16 @@ class TestPasswordStrength < Test::Unit::TestCase
     @strength.instance_variable_set("@status", :good)
     assert @strength.good?
     assert @strength.valid?(:good)
-    assert_equal false, @strength.weak?
-    assert_equal false, @strength.strong?
+    refute @strength.weak?
+    refute @strength.strong?
   end
 
   def test_weak_strength
     @strength.instance_variable_set("@status", :weak)
     assert @strength.weak?
     assert @strength.valid?(:weak)
-    assert_equal false, @strength.good?
-    assert_equal false, @strength.strong?
+    refute @strength.good?
+    refute @strength.strong?
   end
 
   def test_strong_strength
@@ -34,8 +34,8 @@ class TestPasswordStrength < Test::Unit::TestCase
     assert @strength.strong?
     assert @strength.valid?(:strong)
     assert @strength.valid?(:good)
-    assert_equal false, @strength.good?
-    assert_equal false, @strength.weak?
+    refute @strength.good?
+    refute @strength.weak?
   end
 
   def test_short_password
@@ -63,7 +63,7 @@ class TestPasswordStrength < Test::Unit::TestCase
   end
 
   def test_weak_password
-    @strength.password = "1234567890"
+    @strength.password = "ytrewq"
     @strength.test
     assert_equal :weak, @strength.status
 
@@ -228,13 +228,24 @@ class TestPasswordStrength < Test::Unit::TestCase
     @strength = PasswordStrength.test("johndoe", "^Str0ng P4ssw0rd$", :exclude => /\s/)
     assert_equal :invalid, @strength.status
     assert @strength.invalid?
-    assert_equal false, @strength.valid?
+    refute @strength.valid?
   end
 
   def test_exclude_option_as_array
     @strength = PasswordStrength.test("johndoe", "asdfasdfasdf", :exclude => ["asdf", "123"])
     assert_equal :invalid, @strength.status
     assert @strength.invalid?
-    assert_equal false, @strength.valid?
+    refute @strength.valid?
+  end
+
+  def test_loads_common_words
+    assert PasswordStrength::Base.common_words.size > 500
+  end
+
+  def test_reject_common_words
+    @strength = PasswordStrength.test("johndoe", PasswordStrength::Base.common_words.first)
+    assert_equal :invalid, @strength.status
+    assert @strength.invalid?
+    refute @strength.valid?
   end
 end
