@@ -21,6 +21,8 @@ module PasswordStrength
     # The current test status. Can be +:weak+, +:good+, +:strong+ or +:invalid+.
     attr_reader   :status
 
+    # The ActiveRecord instance.
+    # It only makes sense if you're creating a custom ActiveRecord validator.
     attr_reader   :record
 
     # Set what characters cannot be present on password.
