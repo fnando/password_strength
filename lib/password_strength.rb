@@ -1,5 +1,6 @@
 require "active_support"
 require "password_strength/base"
+require "password_strength/engine" if defined?(Rails::Engine)
 require "password_strength/active_record"
 require "password_strength/validators/windows2008"
 
