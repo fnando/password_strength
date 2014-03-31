@@ -1,5 +1,7 @@
 = Introduction
 
+{<img src="https://travis-ci.org/fnando/password_strength.svg" alt="Build Status" />}[https://travis-ci.org/fnando/password_strength]
+
 Validates the strength of a password according to several rules:
 
 * size

@@ -1,0 +1,15 @@
+language: ruby
+script: "bundle exec rake test"
+
+rvm:
+  - 2.1.1
+  - 2.0.0
+
+gemfile:
+  - gemfiles/ar_3_2.gemfile
+  - gemfiles/ar_4_0.gemfile
+  - gemfiles/ar_4_1.gemfile
+
+notifications:
+  email:
+    - fnando.vieira@gmail.com
