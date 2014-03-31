@@ -224,7 +224,6 @@ module PasswordStrength
     end
 
     def repetitions(text, size) # :nodoc:
-      text = text.mb_chars
       count = 0
       matches = []
 
