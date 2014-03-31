@@ -27,6 +27,7 @@
 4444
 5150
 5555
+555555
 654321
 6666
 666666
@@ -164,6 +165,7 @@ dave
 david
 debbie
 dennis
+deuseamor
 diablo
 diamond
 dick
@@ -187,6 +189,7 @@ eric
 erotic
 extreme
 falcon
+FaMiLia
 fender
 ferrari
 fire
@@ -262,6 +265,7 @@ jennifer
 jeremy
 jessica
 jesus
+jesuscristo
 john
 johnny
 johnson
@@ -294,6 +298,7 @@ madison
 maggie
 magic
 magnum
+MARCELO
 marine
 mark
 marlboro
