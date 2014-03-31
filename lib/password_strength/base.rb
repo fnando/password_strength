@@ -21,6 +21,8 @@ module PasswordStrength
     # The current test status. Can be +:weak+, +:good+, +:strong+ or +:invalid+.
     attr_reader   :status
 
+    attr_reader   :record
+
     # Set what characters cannot be present on password.
     # Can be a regular expression or array.
     #
@@ -61,6 +63,7 @@ module PasswordStrength
       @password = password.to_s
       @score = 0
       @exclude = options[:exclude]
+      @record = options[:record]
     end
 
     # Check if the password has the specified score.
