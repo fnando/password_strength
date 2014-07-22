@@ -55,6 +55,20 @@ class TestActiveRecord < Test::Unit::TestCase
     assert @user.errors.full_messages.empty?
   end
 
+  def test_lambda_strong_level
+    User.validates_strength_of :password, :level => lambda {|u| :strong }
+
+    @user.update_attributes :username => "johndoe", :password => "12345asdfg"
+    assert @user.errors.full_messages.any?
+  end
+
+  def test_lambda_weak_level
+    User.validates_strength_of :password, :level => lambda {|u| :week }
+
+    @user.update_attributes :username => "johndoe", :password => "johndoe"
+    assert @user.errors.full_messages.empty?
+  end
+
   def test_custom_username
     User.validates_strength_of :password, :with => :login
 

@@ -69,7 +69,13 @@ If you want to compare your password against other field, you have to set the <t
 
   validates_strength_of :password, :with => :email
 
-The available levels are: <tt>:weak</tt>, <tt>:good</tt> and <tt>:strong</tt>
+The available levels are: <tt>:weak</tt>, <tt>:good</tt> and <tt>:strong</tt>.
+
+  validates_strength_of :password, :with => :email, :level => :good
+
+Also you can set level with a lambda.
+
+  validates_strength_of :password, :with => :email, :level => lambda {|u| :good }
 
 You can also provide a custom class/module that will test that password.
 

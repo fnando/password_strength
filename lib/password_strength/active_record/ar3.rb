@@ -12,14 +12,24 @@ module ActiveModel # :nodoc:
           :record => record
         )
         strength.test
-        record.errors.add(attribute, :too_weak, options) unless PasswordStrength.enabled && strength.valid?(options[:level])
+        record.errors.add(attribute, :too_weak, options) unless PasswordStrength.enabled && strength.valid?(level(record))
       end
 
       def check_validity!
         raise ArgumentError, "The :with option must be supplied" unless options.include?(:with)
         raise ArgumentError, "The :exclude options must be an array of strings or regular expression" if options[:exclude] && !options[:exclude].kind_of?(Array) && !options[:exclude].kind_of?(Regexp)
-        raise ArgumentError, "The :level option must be one of [:weak, :good, :strong]" unless [:weak, :good, :strong].include?(options[:level])
+        unless [:weak, :good, :strong].include?(options[:level]) || options[:level].respond_to?(:call)
+          raise ArgumentError, "The :level option must be one of [:weak, :good, :strong], a proc or a lambda"
+        end
         super
+      end
+
+      def level(record)
+        if options[:level].respond_to?(:call)
+          options[:level].call(record)
+        else
+          options[:level]
+        end
       end
     end
 
