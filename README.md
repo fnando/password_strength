@@ -171,8 +171,8 @@ $.strength("#username", "#password", function(username, password, strength){
 
 Get the files:
 
-* http://github.com/fnando/password_strength/raw/master/app/assets/javascripts/password_strength.js
-* http://github.com/fnando/password_strength/raw/master/app/assets/javascripts/jquery.strength.js
+* https://github.com/fnando/password_strength/blob/master/app/assets/javascripts/jquery_strength.js
+* https://github.com/fnando/password_strength/blob/master/app/assets/javascripts/password_strength.js
 
 If you're using asset pipeline, just add the following lines to your `application.js`.
 
