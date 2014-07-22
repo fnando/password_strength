@@ -65,7 +65,7 @@ var PasswordStrength = (function(){
 
     switch (name) {
       case "password_size":
-        if (this.password.length < 4) {
+        if (this.password.length < 6) {
           score = -100;
         } else {
           score = this.password.length * 4;
