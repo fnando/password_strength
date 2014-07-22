@@ -1,8 +1,11 @@
-require "active_support"
+require "active_model"
 require "password_strength/base"
 require "password_strength/engine" if defined?(Rails::Engine)
-require "password_strength/active_record"
+require "password_strength/active_model"
 require "password_strength/validators/windows2008"
+
+# I18n.load_path += Dir[File.dirname(__FILE__) + "/../locales/**/*.yml"]
+I18n.load_path += Dir[File.expand_path("../../locales/*.yml", __FILE__)]
 
 module PasswordStrength
   # Test the password strength by applying several rules.

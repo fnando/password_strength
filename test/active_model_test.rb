@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 require "test_helper"
 
-class TestActiveRecord < Test::Unit::TestCase
+class TestActiveModel < Test::Unit::TestCase
   def setup
     PasswordStrength.enabled = true
     Object.class_eval { remove_const("User") } if defined?(User)
@@ -15,7 +15,7 @@ class TestActiveRecord < Test::Unit::TestCase
   end
 
   def test_error_messages_in_pt
-    I18n.locale = :pt
+    I18n.locale = 'pt-BR'
     User.validates_strength_of :password
     @user.update_attributes :password => "123"
     assert @user.errors.full_messages.include?("Password não é segura; utilize letras (maiúsculas e mínusculas), números e caracteres especiais")

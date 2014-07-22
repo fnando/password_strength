@@ -1,4 +1,4 @@
-pt: &pt
+pt-PT: &pt
   activerecord:
     errors: &ERRORS
       messages:
@@ -8,7 +8,4 @@ pt: &pt
     <<: *ERRORS
 
 pt-BR:
-  <<: *pt
-
-pt-PT:
   <<: *pt
