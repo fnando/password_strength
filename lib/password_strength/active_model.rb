@@ -18,19 +18,28 @@ module ActiveModel # :nodoc:
       def check_validity!
         raise ArgumentError, "The :with option must be supplied" unless options.include?(:with)
         raise ArgumentError, "The :exclude options must be an array of strings or regular expression" if options[:exclude] && !options[:exclude].kind_of?(Array) && !options[:exclude].kind_of?(Regexp)
-        unless [:weak, :good, :strong].include?(options[:level]) || options[:level].respond_to?(:call)
-          raise ArgumentError, "The :level option must be one of [:weak, :good, :strong], a proc or a lambda"
-        end
+        check_level_validity!(options[:level])
         super
       end
 
       def level(record)
         if options[:level].respond_to?(:call)
-          options[:level].call(record)
+          level = options[:level].call(record).to_sym
+          check_level_validity!(level)
+          level
         else
           options[:level]
         end
       end
+
+      private
+
+      def check_level_validity!(level)
+        unless [:weak, :good, :strong].include?(level) || level.respond_to?(:call)
+          raise ArgumentError, "The :level option must be one of [:weak, :good, :strong], a proc or a lambda"
+        end
+      end
+
     end
 
     module ClassMethods

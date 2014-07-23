@@ -63,10 +63,25 @@ class TestActiveModel < Test::Unit::TestCase
   end
 
   def test_lambda_weak_level
-    User.validates_strength_of :password, :level => lambda {|u| :week }
+    User.validates_strength_of :password, :level => lambda {|u| :weak }
 
     @user.update_attributes :username => "johndoe", :password => "johndoe"
     assert @user.errors.full_messages.empty?
+  end
+
+  def test_lambda_with_string_return
+    User.validates_strength_of :password, :level => lambda {|u| 'weak' }
+
+    @user.update_attributes :username => "johndoe", :password => "johndoe"
+    assert @user.errors.full_messages.empty?
+  end
+
+  def test_lambda_incorrect_level
+    User.validates_strength_of :password, :level => lambda {|u| 'incorrect_level' }
+
+    assert_raise(ArgumentError, "The :level option must be one of [:weak, :good, :strong], a proc or a lambda") do
+      @user.update_attributes :username => "johndoe", :password => "johndoe"
+    end
   end
 
   def test_custom_username
