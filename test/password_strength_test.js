@@ -191,7 +191,7 @@ new Test.Unit.Runner({
   // Password length
   testPasswordLength: function() { with(this) {
     strength.password = "12345";
-    assertEqual(20, strength.scoreFor("password_size"));
+    assertEqual(-100, strength.scoreFor("password_size"));
   }},
 
   // Password with numbers
