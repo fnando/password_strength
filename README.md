@@ -123,7 +123,7 @@ PasswordStrength implements two validators: `PasswordStrength::Base` and `Passwo
 
 The PasswordStrength also implements the algorithm in the JavaScript.
 
-```ruby
+```javascript
 var strength = PasswordStrength.test("johndoe", "mypass");
 strength.isGood();
 strength.isStrong();
@@ -135,14 +135,14 @@ The API is basically the same!
 
 You can use the `:exclude` option. Only regular expressions are supported for now.
 
-```ruby
+```javascript
 var strength = PasswordStrength.test("johndoe", "password with whitespaces", {exclude: /\s/});
 strength.isInvalid();
 ```
 
 Additionaly, a jQuery plugin is available.
 
-```ruby
+```javascript
 $.strength("#username", "#password");
 ```
 
@@ -152,7 +152,7 @@ The result will be an image to the respective strength status. By default the im
 
 You can overwrite the image path and the default callback.
 
-```ruby
+```javascript
 $.strength.weakImage = "/weak.png";
 $.strength.goodImage = "/good.png";
 $.strength.strongImage = "/strong.png";
@@ -163,7 +163,7 @@ $.strength.callback = function(username, password, strength) {
 
 If you just want to overwrite the callback, you can simple do
 
-```ruby
+```javascript
 $.strength("#username", "#password", function(username, password, strength){
     // do whatever you want
 });
