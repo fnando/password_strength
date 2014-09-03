@@ -244,9 +244,12 @@ class TestPasswordStrength < Test::Unit::TestCase
   end
 
   def test_reject_common_words
-    @strength = PasswordStrength.test("johndoe", PasswordStrength::Base.common_words.first)
-    assert_equal :invalid, @strength.status
-    assert @strength.invalid?
+    $BREAKPOINT = true
+    password = PasswordStrength::Base.common_words.first
+    @strength = PasswordStrength.test("johndoe", password)
+    assert @strength.invalid?, "#{password} must be invalid"
     refute @strength.valid?
+    assert_equal :invalid, @strength.status
+    $BREAKPOINT = false
   end
 end

@@ -263,8 +263,7 @@ new Test.Unit.Runner({
 
   // Reject common passwords
   testRejectCommonPasswords: function() { with(this) {
-    strength.password = "password with whitespaces";
-    strength.exclude = /\s/;
+    strength.password = PasswordStrength.commonWords[0];
     strength.test();
 
     assertEqual("invalid", strength.status);
