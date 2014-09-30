@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    password_strength (1.0.1)
+    password_strength (1.0.2)
       activemodel
 
 GEM
