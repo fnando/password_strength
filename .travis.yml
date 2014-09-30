@@ -6,9 +6,9 @@ rvm:
   - 2.0.0
 
 gemfile:
-  - gemfiles/ar_3_2.gemfile
-  - gemfiles/ar_4_0.gemfile
-  - gemfiles/ar_4_1.gemfile
+  - gemfiles/am_3_2.gemfile
+  - gemfiles/am_4_0.gemfile
+  - gemfiles/am_4_1.gemfile
 
 notifications:
   email:

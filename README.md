@@ -61,12 +61,28 @@ strength.valid?(:good)
 #=> strength == :good or strength == :strong
 ```
 
-## ActiveRecord
+## ActiveRecord/ActiveModel
 
-The PasswordStrength library comes with ActiveRecord support.
+The PasswordStrength library comes with ActiveRecord/ActiveModel support.
 
 ```ruby
 class Person < ActiveRecord::Base
+  validates_strength_of :password
+end
+```
+
+To be honest, you can use it with plain ActiveModel objects.
+
+```ruby
+class Person
+  include ActiveModel::Model
+  validates_strength_of :password
+end
+
+# or simply
+
+class Person
+  include ActiveModel::Validations
   validates_strength_of :password
 end
 ```

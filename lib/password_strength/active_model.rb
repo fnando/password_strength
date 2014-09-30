@@ -17,7 +17,7 @@ module ActiveModel # :nodoc:
 
       def check_validity!
         raise ArgumentError, "The :with option must be supplied" unless options.include?(:with)
-        raise ArgumentError, "The :exclude options must be an array of strings or regular expression" if options[:exclude] && !options[:exclude].kind_of?(Array) && !options[:exclude].kind_of?(Regexp)
+        raise ArgumentError, "The :exclude options must be an array of strings or a regular expression" if options[:exclude] && !options[:exclude].kind_of?(Array) && !options[:exclude].kind_of?(Regexp)
         check_level_validity!(options[:level])
         super
       end
