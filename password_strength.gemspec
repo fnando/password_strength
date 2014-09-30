@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors               = ["Nando Vieira"]
   s.email                 = ["fnando.vieira@gmail.com"]
   s.homepage              = "http://github.com/fnando/password_strength"
-  s.summary               = "Check password strength against several rules. Includes ActiveRecord support."
+  s.summary               = "Check password strength against several rules. Includes ActiveRecord/ActiveModel support."
   s.description           = s.summary
   s.license               = "MIT"
 
