@@ -9,19 +9,16 @@ module PasswordStrength
     # Reference: http://technet.microsoft.com/en-us/library/cc264456.aspx
     #
     class Windows2008 < PasswordStrength::Base
+      VARIETY_METRICS = [/[A-Z]/, /[a-z]/, /[0-9]/, PasswordStrength::Base::SYMBOL_RE]
+
       def test
-        return invalid! if password.size < 6
-
-        variety = 0
-        variety += 1 if password =~ /[A-Z]/
-        variety += 1 if password =~ /[a-z]/
-        variety += 1 if password =~ /[0-9]/
-        variety += 1 if password =~ PasswordStrength::Base::SYMBOL_RE
-
-        return invalid! if variety < 3
-        return invalid! if password_contains_username?
+        return invalid! if password.size < 6 || measure_variety < 3 || password_contains_username?
 
         strong!
+      end
+
+      def measure_variety
+        VARIETY_METRICS.map { |pattern| 1 if password =~ pattern }.compact.count
       end
 
       def password_contains_username?
