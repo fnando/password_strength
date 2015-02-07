@@ -18,7 +18,7 @@ module PasswordStrength
       end
 
       def measure_variety
-        VARIETY_METRICS.map { |pattern| 1 if password =~ pattern }.compact.count
+        VARIETY_METRICS.count { |pattern| password =~ pattern }
       end
 
       def password_contains_username?
