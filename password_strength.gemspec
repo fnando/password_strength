@@ -20,7 +20,6 @@ Gem::Specification.new do |s|
   s.add_dependency "activemodel"
 
   s.add_development_dependency "rake"
-  s.add_development_dependency "pry-meta"
   s.add_development_dependency "minitest"
   s.add_development_dependency "minitest-utils"
 end
