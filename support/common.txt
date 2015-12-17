@@ -1,6 +1,5 @@
 !qaz1qaz
 !qaz2wsx
-!qaz2wsx
 !qazxsw2
 !qazzaq1
 #edc4rfv
@@ -27,6 +26,7 @@
 131313
 1941.salembbb.41
 1qaz!qaz
+1qaz2wsx
 1qaz@wsx
 1qazxsw@
 1qazzaq!
@@ -42,6 +42,7 @@
 4444
 5150
 5555
+55555
 555555
 654321
 6666
@@ -53,14 +54,13 @@
 7777777
 8675309
 987654
+987654321
 @wsx2wsx
 aaaa
 aaaaaa
 aaliyah1
 abc123
 abc123abc
-abc123abc
-abcabc123
 abcabc123
 abcd1234
 abcdef
@@ -72,6 +72,7 @@ action
 addison1
 admin
 adobe123
+affair
 airforce1
 alabama1
 albert
@@ -108,7 +109,10 @@ arsenal12
 arsenal123
 arthur
 asdf
+asdfasdf
+asdfg
 asdfgh
+asdfghjkl
 ashley
 ashley12
 asshole
@@ -128,7 +132,6 @@ awesome1
 azerty
 baby
 babyboy1
-babygirl1
 babygirl1
 babygurl1
 badboy
@@ -301,6 +304,7 @@ death666
 debbie
 december1
 december21
+DEFAULT
 dennis
 derrick1
 destiny1
@@ -373,10 +377,10 @@ fucked
 fucker
 fucking
 fuckme
+fuckoff
 fuckoff1
 fuckyou
 fuckyou1
-fuckyou2
 fuckyou2
 gabriel1
 gandalf
@@ -430,6 +434,7 @@ honey123
 hooters
 horney
 horny
+hosts
 hotdog
 house
 houston1
@@ -441,7 +446,6 @@ iloveme1
 iloveme2
 iloveyou
 iloveyou1
-iloveyou2
 iloveyou2
 internet
 internet1
@@ -514,6 +518,7 @@ katelyn1
 katherine1
 kathryn1
 katrina1
+kazuga
 kelly
 kendall1
 kennedy1
@@ -544,10 +549,12 @@ lindsay1
 lindsey1
 little
 liverp00l
+liverpool
 liverpool1
 liverpool123
 london
 longhorns1
+looking
 love
 love4ever
 lover
@@ -686,17 +693,13 @@ pass
 pass1234
 passion1
 passw0rd
-passw0rd
 passw0rd1
 password
 password01
 password1
-password1
 password1!
 password11
 password12
-password12
-password123
 password123
 password13
 password2
@@ -731,7 +734,6 @@ playboy1
 player
 please
 pokemon1
-poohbear1
 poohbear1
 pookie
 popcorn1
@@ -773,6 +775,7 @@ qwert
 qwerty
 qwerty123
 qwertyui
+qwertyuiop
 rabbit
 rachel
 racing
@@ -800,7 +803,6 @@ rock
 rocket
 rockstar1
 rocky123
-rockyou1
 rockyou1
 ronaldo7
 rosebud
@@ -948,8 +950,6 @@ trinity3
 tristan1
 trouble
 trouble1
-trustno1
-trustno1
 trustno1
 tucker
 turtle
