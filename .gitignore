@@ -4,3 +4,4 @@ doc
 /gemfiles/*.lock
 /node_modules
 Gemfile.lock
+*.log
