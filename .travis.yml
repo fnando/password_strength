@@ -2,13 +2,15 @@ language: ruby
 script: "bundle exec rake test"
 
 rvm:
-  - 2.1.1
-  - 2.0.0
+  - '2.2'
+  - '2.1'
+  - '2.0'
 
 gemfile:
   - gemfiles/am_3_2.gemfile
   - gemfiles/am_4_0.gemfile
   - gemfiles/am_4_1.gemfile
+  - gemfiles/am_4_2.gemfile
 
 notifications:
   email:

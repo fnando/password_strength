@@ -1,4 +1,12 @@
-(function($){
+(function(initializer) {
+  if (typeof(module) && module.exports) {
+    module.exports = initializer;
+  } else if (typeof(require) === "function" && require.amd) {
+    require(["password_strength", "jquery"], initializer);
+  } else {
+    initializer(window.PasswordStrength, window.jQuery);
+  }
+}(function(PasswordStrength, $){
   $.strength = function(username, password, options, callback) {
     if (typeof(options) == "function") {
       callback = options;
@@ -59,4 +67,4 @@
     goodImage: "/images/good.png",
     strongImage: "/images/strong.png"
   });
-})(jQuery);
+}));

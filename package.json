@@ -1,0 +1,11 @@
+{
+  "name": "password_strength",
+  "version": "1.0.2",
+  "repository": "http://github.com/fnando/password_strength",
+  "license": "MIT",
+  "main": "app/assets/javascripts/password_strength.js",
+  "devDependencies": {
+    "jquery": "^2.1.4",
+    "qunitjs": "^1.20.0"
+  }
+}

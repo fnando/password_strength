@@ -198,6 +198,18 @@ If you're using asset pipeline, just add the following lines to your `applicatio
 //= require jquery_strength
 ```
 
+## Running tests
+
+### Ruby
+
+1. Install all dependencies with `bundle install`.
+2. Run `rake test`.
+
+### JavaScript
+
+1. Install Node.js, then run `npm install`.
+2. Open `test/password_strength_test.html` in your target browser.
+
 ## License
 
 (The MIT License)

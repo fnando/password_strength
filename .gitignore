@@ -2,3 +2,4 @@ pkg
 coverage
 doc
 /gemfiles/*.lock
+/node_modules

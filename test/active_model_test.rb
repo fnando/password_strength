@@ -1,7 +1,6 @@
-# -*- encoding: utf-8 -*-
 require "test_helper"
 
-class TestActiveModel < Test::Unit::TestCase
+class TestActiveModel < Minitest::Test
   def setup
     PasswordStrength.enabled = true
     Object.class_eval { remove_const("User") } if defined?(User)
@@ -79,7 +78,7 @@ class TestActiveModel < Test::Unit::TestCase
   def test_lambda_incorrect_level
     User.validates_strength_of :password, :level => lambda {|u| 'incorrect_level' }
 
-    assert_raise(ArgumentError, "The :level option must be one of [:weak, :good, :strong], a proc or a lambda") do
+    assert_raises(ArgumentError, "The :level option must be one of [:weak, :good, :strong], a proc or a lambda") do
       @user.update_attributes :username => "johndoe", :password => "johndoe"
     end
   end

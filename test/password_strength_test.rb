@@ -1,7 +1,6 @@
-# -*- encoding: utf-8 -*-
 require "test_helper"
 
-class TestPasswordStrength < Test::Unit::TestCase
+class TestPasswordStrength < Minitest::Test
   def setup
     @strength = PasswordStrength::Base.new("johndoe", "mypass")
   end

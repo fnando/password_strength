@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Window2008Test < Test::Unit::TestCase
+class Window2008Test < Minitest::Test
   def setup
     PasswordStrength.enabled = true
     Object.class_eval { remove_const("User") } if defined?(User)
