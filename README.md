@@ -113,9 +113,7 @@ You can also provide a custom class/module that will test that password.
 validates_strength_of :password, :using => CustomPasswordTester
 ```
 
-Your +CustomPasswordTester+ class should override the default implementation. In practice, you're
-going to override only the +test+ method that must call one of the following methods:
-`invalid!`, `weak!`, `good!` or `strong!`.
+Your `CustomPasswordTester` class should override the default implementation. In practice, you're going to override only the `test` method that must call one of the following methods: `invalid!`, `weak!`, `good!` or `strong!`.
 
 ```ruby
 class CustomPasswordTester < PasswordStrength::Base
