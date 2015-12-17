@@ -224,6 +224,13 @@ class TestPasswordStrength < Minitest::Test
     assert_equal 4, @strength.repetitions("§£€à§£€à§£€à", 4)
   end
 
+  def test_reject_long_passwords_using_same_character
+    @strength = PasswordStrength.test("johndoe", "a" * 50)
+    assert_equal :invalid, @strength.status
+    assert @strength.invalid?
+    refute @strength.valid?
+  end
+
   def test_exclude_option_as_regular_expression
     @strength = PasswordStrength.test("johndoe", "^Str0ng P4ssw0rd$", :exclude => /\s/)
     assert_equal :invalid, @strength.status

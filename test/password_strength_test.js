@@ -48,7 +48,7 @@ QUnit.test("detect strong strength", function(assert) {
 });
 
 QUnit.test("test short password", function(assert) {
-  strength.password = "a";
+  strength.password = "abc";
   strength.test();
 
   assert.equal(strength.score, 0);
@@ -238,6 +238,14 @@ QUnit.test("reject common passwords", function(assert) {
   assert.equal(strength.status, "invalid");
   assert.ok(strength.isInvalid());
   assert.equal(strength.isValid(), false);
+});
+
+QUnit.test("reject long passwords using same character", function(assert) {
+    strength.password = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    strength.test();
+    assert.equal(strength.status, "invalid");
+    // assert @strength.invalid?
+    // refute @strength.valid?
 });
 
 QUnit.module("PasswordStrength: jQuery integration", {

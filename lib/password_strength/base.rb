@@ -187,6 +187,8 @@ module PasswordStrength
         invalid!
       elsif common_word?
         invalid!
+      elsif contain_invalid_repetion?
+        invalid!
       else
         @score += score_for(:password_size)
         @score += score_for(:numbers)
@@ -220,6 +222,12 @@ module PasswordStrength
       return false unless exclude
       regex = exclude
       regex = /#{exclude.collect {|i| Regexp.escape(i)}.join("|")}/ if exclude.kind_of?(Array)
+      password.to_s =~ regex
+    end
+
+    def contain_invalid_repetion?
+      char = password.to_s.chars.first
+      regex = /^#{Regexp.escape(char)}+$/i
       password.to_s =~ regex
     end
 

@@ -4,6 +4,10 @@
   var UPPERCASE_LOWERCASE_RE = /([a-z].*[A-Z])|([A-Z].*[a-z])/;
   var SYMBOL_RE = /[!@#\$%^&*?_~]/;
 
+  function escapeForRegexp(string) {
+    return string.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+  }
+
   function PasswordStrength() {
     this.username = null;
     this.password = null;
@@ -20,6 +24,8 @@
     if (this.containInvalidMatches()) {
       this.status = "invalid";
     } else if (this.usesCommonWord()) {
+      this.status = "invalid";
+    } else if (this.containInvalidRepetition()) {
       this.status = "invalid";
     } else {
       score += this.scoreFor("password_size");
@@ -179,6 +185,13 @@
     }
 
     return this.exclude.test(this.password.toString());
+  };
+
+  PasswordStrength.fn.containInvalidRepetition = function() {
+    var char = this.password[0];
+    var regex = new RegExp("^" + escapeForRegexp(char) + "+$", "i");
+
+    return regex.test(this.password);
   };
 
   PasswordStrength.fn.usesCommonWord = function() {
