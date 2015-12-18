@@ -16,6 +16,13 @@ QUnit.test("shortcut", function(assert) {
   assert.ok(strength.status);
 });
 
+QUnit.test("deal with empty password", function(assert) {
+  strength = PasswordStrength.test("johndoe", "");
+
+  assert.equal(strength.status, "weak");
+  assert.ok(strength.isWeak());
+});
+
 QUnit.test("detect good strength", function(assert) {
   strength.status = "good";
 

@@ -5,7 +5,7 @@
   var SYMBOL_RE = /[!@#\$%^&*?_~]/;
 
   function escapeForRegexp(string) {
-    return string.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+    return (string || "").replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
   }
 
   function PasswordStrength() {
@@ -189,6 +189,11 @@
 
   PasswordStrength.fn.containInvalidRepetition = function() {
     var char = this.password[0];
+
+    if (!char) {
+      return;
+    }
+
     var regex = new RegExp("^" + escapeForRegexp(char) + "+$", "i");
 
     return regex.test(this.password);

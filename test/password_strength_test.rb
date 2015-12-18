@@ -13,6 +13,12 @@ class TestPasswordStrength < Minitest::Test
     assert_equal "mypass", @strength.password
   end
 
+  def test_deal_with_empty_password
+    @strength = PasswordStrength.test("johndoe", "")
+    assert @strength.weak?
+
+  end
+
   def test_good_strength
     @strength.instance_variable_set("@status", :good)
     assert @strength.good?

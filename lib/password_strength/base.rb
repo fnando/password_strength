@@ -227,6 +227,7 @@ module PasswordStrength
 
     def contain_invalid_repetion?
       char = password.to_s.chars.first
+      return unless char
       regex = /^#{Regexp.escape(char)}+$/i
       password.to_s =~ regex
     end
