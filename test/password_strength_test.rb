@@ -45,7 +45,7 @@ class TestPasswordStrength < Minitest::Test
   end
 
   def test_short_password
-    @strength.password = "123"
+    @strength.password = "xyz"
     @strength.test
 
     assert_equal 0, @strength.score
@@ -115,7 +115,7 @@ class TestPasswordStrength < Minitest::Test
   end
 
   def test_penalize_number_sequence
-    @strength.password = "123"
+    @strength.password = "234"
     assert_equal -15, @strength.score_for(:sequences)
 
     @strength.password = "123123"
@@ -157,7 +157,7 @@ class TestPasswordStrength < Minitest::Test
   end
 
   def test_penalize_short_password
-    @strength.password = "123"
+    @strength.password = "abc"
     assert_equal -100, @strength.score_for(:password_size)
   end
 
