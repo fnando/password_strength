@@ -1,6 +1,6 @@
 {
-  "name": "password__strength",
-  "version": "1.1.1",
+  "name": "@fnando/password_strength",
+  "version": "1.1.2",
   "repository": "http://github.com/fnando/password_strength",
   "license": "MIT",
   "main": "app/assets/javascripts/password_strength.js",
