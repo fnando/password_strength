@@ -1,5 +1,7 @@
 # Introduction
 
+Check password strength against several rules. Includes ActiveRecord/ActiveModel support.
+
 <a href="https://travis-ci.org/fnando/password_strength"><img src="https://travis-ci.org/fnando/password_strength.svg" alt="Build Status" /></a>
 
 Validates the strength of a password according to several rules:
@@ -32,6 +34,12 @@ or put this in your Gemfile:
 
 ```ruby
 gem "password_strength"
+```
+
+The JavaScript code is also available as a NPM package.
+
+```
+npm install @fnando/password_strength --save
 ```
 
 If you want the source go to http://github.com/fnando/password_strength
