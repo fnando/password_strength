@@ -1,10 +1,11 @@
 language: ruby
 script: "bundle exec rake test"
+cache: bundler
 sudo: false
 rvm:
+  - '2.3.0'
   - '2.2'
   - '2.1'
-  - '2.0'
 
 gemfile:
   - gemfiles/am_3_2.gemfile
