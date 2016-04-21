@@ -67,7 +67,7 @@
   };
 
   PasswordStrength.fn.scoreFor = function(name) {
-    score = 0;
+    var score = 0;
 
     switch (name) {
       case "password_size":
@@ -275,7 +275,7 @@
   };
 
   PasswordStrength.test = function(username, password) {
-    strength = new PasswordStrength();
+    var strength = new PasswordStrength();
     strength.username = username;
     strength.password = password;
     strength.test();
