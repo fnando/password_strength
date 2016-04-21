@@ -14,5 +14,4 @@ gemfile:
   - gemfiles/am_4_2.gemfile
 
 notifications:
-  email:
-    - fnando.vieira@gmail.com
+  email: false
