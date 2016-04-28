@@ -1,5 +1,5 @@
 (function(initializer) {
-  if (typeof(module) && module.exports) {
+  if (typeof(module) === "object" && module.exports) {
     module.exports = initializer;
   } else if (typeof(require) === "function" && require.amd) {
     require(["password_strength", "jquery"], initializer);
