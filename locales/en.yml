@@ -2,7 +2,7 @@ en:
   activerecord:
     errors: &ERRORS
       messages:
-        too_weak: "is not secure; use letters (uppercase and downcase), numbers and special characters"
+        too_weak: "is not secure; use letters (uppercase and lowercase), numbers and special characters"
 
   errors:
     <<: *ERRORS

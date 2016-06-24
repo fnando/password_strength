@@ -24,7 +24,7 @@ class TestActiveModel < Minitest::Test
     I18n.locale = :en
     User.validates_strength_of :password
     @user.update_attributes :password => "123"
-    assert @user.errors.full_messages.include?("Password is not secure; use letters (uppercase and downcase), numbers and special characters")
+    assert @user.errors.full_messages.include?("Password is not secure; use letters (uppercase and lowercase), numbers and special characters")
   end
 
   def test_custom_error_message
