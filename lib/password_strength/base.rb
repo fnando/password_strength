@@ -165,7 +165,7 @@ module PasswordStrength
         if password == username
           score = -100
         else
-          score = -15 if password =~ /#{Regexp.escape(username)}/
+          score = -15 if password =~ /#{Regexp.escape(username)}/i
         end
       when :sequences then
         score = -15 * sequences(password)

@@ -90,6 +90,13 @@ class TestActiveModel < Minitest::Test
     assert @user.errors.full_messages.any?
   end
 
+  def test_custom_username_case_insensitive
+    User.validates_strength_of :password, :with => :login
+
+    @user.update_attributes :login => "johnd", :password => "johnD!"
+    assert @user.errors.full_messages.any?
+  end
+
   def test_blank_username
     User.validates_strength_of :password
 
