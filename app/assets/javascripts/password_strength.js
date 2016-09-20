@@ -129,7 +129,7 @@
       case "username":
         if (this.password == this.username) {
           score = -100;
-        } else if (this.password.indexOf(this.username) != -1) {
+        } else if (this.password.toLowerCase().indexOf(this.username.toLowerCase()) != -1) {
           score = -15;
         }
         break;

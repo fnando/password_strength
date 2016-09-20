@@ -119,9 +119,9 @@ QUnit.test("penalize password equal to username", function(assert) {
   assert.equal(strength.scoreFor("username"), -100);
 });
 
-QUnit.test("penalize password that contains username", function(assert) {
+QUnit.test("penalize password that contains username ignoring case", function(assert) {
   strength.username = "johndoe";
-  strength.password = "$1234johndoe^";
+  strength.password = "$1234JoHnDoE^";
   assert.equal(strength.scoreFor("username"), -15);
 });
 
