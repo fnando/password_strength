@@ -1,8 +1,8 @@
 (function(){
   var MULTIPLE_NUMBERS_RE = /\d.*?\d.*?\d/;
-  var MULTIPLE_SYMBOLS_RE = /[!@#$%^&*?_~].*?[!@#$%^&*?_~]/;
+  var MULTIPLE_SYMBOLS_RE = /[!@#$%^&*?_~-].*?[!@#$%^&*?_~-]/;
   var UPPERCASE_LOWERCASE_RE = /([a-z].*[A-Z])|([A-Z].*[a-z])/;
-  var SYMBOL_RE = /[!@#\$%^&*?_~]/;
+  var SYMBOL_RE = /[!@#\$%^&*?_~-]/;
 
   function escapeForRegexp(string) {
     return (string || "").replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");

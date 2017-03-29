@@ -212,6 +212,11 @@ QUnit.test("reward password that contains symbols and chars", function(assert) {
   assert.equal(strength.scoreFor("symbols_chars"), 15);
 });
 
+QUnit.test("reward password that contains '-' symbol and chars", function(assert) {
+  strength.password = "a-";
+  assert.equal(strength.scoreFor("symbols_chars"), 15);
+});
+
 QUnit.test("detect two-chars repetitions", function(assert) {
   assert.equal(strength.repetitions("11221122", 2), 3);
 });
