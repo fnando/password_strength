@@ -3,6 +3,8 @@
   var MULTIPLE_SYMBOLS_RE = /[!@#$%^&*?_~].*?[!@#$%^&*?_~]/;
   var UPPERCASE_LOWERCASE_RE = /([a-z].*[A-Z])|([A-Z].*[a-z])/;
   var SYMBOL_RE = /[!@#\$%^&*?_~]/;
+  var PASSWORD_LIMIT = 3000;
+  var USERNAME_LIMIT = 100000;
 
   function escapeForRegexp(string) {
     return (string || "").replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
@@ -276,8 +278,8 @@
 
   PasswordStrength.test = function(username, password) {
     var strength = new PasswordStrength();
-    strength.username = username;
-    strength.password = password;
+    strength.username = username.substr(0, USERNAME_LIMIT);
+    strength.password = password.substr(0, PASSWORD_LIMIT);
     strength.test();
     return strength;
   };

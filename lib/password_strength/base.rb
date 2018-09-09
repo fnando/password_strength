@@ -4,6 +4,8 @@ module PasswordStrength
     MULTIPLE_SYMBOLS_RE = /[!@#\$%^&*?_~-].*?[!@#\$%^&*?_~-]/
     SYMBOL_RE = /[!@#\$%^&*?_~-]/
     UPPERCASE_LOWERCASE_RE = /([a-z].*[A-Z])|([A-Z].*[a-z])/
+    PASSWORD_LIMIT = 3_000
+    USERNAME_LIMIT = 100_000
     INVALID = :invalid
     WEAK = :weak
     STRONG = :strong
@@ -61,8 +63,8 @@ module PasswordStrength
     end
 
     def initialize(username, password, options = {})
-      @username = username.to_s
-      @password = password.to_s
+      @username = username.to_s[0...USERNAME_LIMIT]
+      @password = password.to_s[0...PASSWORD_LIMIT]
       @score = 0
       @exclude = options[:exclude]
       @record = options[:record]
