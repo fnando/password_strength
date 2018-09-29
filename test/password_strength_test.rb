@@ -237,6 +237,14 @@ class TestPasswordStrength < Minitest::Test
     refute @strength.valid?
   end
 
+  def test_long_passwords_the_same_as_truncated
+    PasswordStrength::Base.send(:remove_const, :PASSWORD_LIMIT)
+    PasswordStrength::Base.const_set(:PASSWORD_LIMIT, 20)
+    @strength_20 = PasswordStrength.test("johndoe", "ab"*10)
+    @strength_200 = PasswordStrength.test("johndoe", "ab"*100)
+    assert @strength == @strength
+  end
+
   def test_exclude_option_as_regular_expression
     @strength = PasswordStrength.test("johndoe", "^Str0ng P4ssw0rd$", :exclude => /\s/)
     assert_equal :invalid, @strength.status

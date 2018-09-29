@@ -4,8 +4,8 @@ module PasswordStrength
     MULTIPLE_SYMBOLS_RE = /[!@#\$%^&*?_~-].*?[!@#\$%^&*?_~-]/
     SYMBOL_RE = /[!@#\$%^&*?_~-]/
     UPPERCASE_LOWERCASE_RE = /([a-z].*[A-Z])|([A-Z].*[a-z])/
-    PASSWORD_LIMIT = 3_000
-    USERNAME_LIMIT = 100_000
+    PASSWORD_LIMIT = 1_000
+    USERNAME_LIMIT = 50_000
     INVALID = :invalid
     WEAK = :weak
     STRONG = :strong
