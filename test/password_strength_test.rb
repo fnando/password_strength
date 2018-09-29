@@ -264,12 +264,10 @@ class TestPasswordStrength < Minitest::Test
   end
 
   def test_reject_common_words
-    $BREAKPOINT = true
     password = PasswordStrength::Base.common_words.first
     @strength = PasswordStrength.test("johndoe", password)
     assert @strength.invalid?, "#{password} must be invalid"
     refute @strength.valid?
     assert_equal :invalid, @strength.status
-    $BREAKPOINT = false
   end
 end
