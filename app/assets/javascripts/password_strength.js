@@ -3,8 +3,8 @@
   var MULTIPLE_SYMBOLS_RE = /[!@#$%^&*?_~].*?[!@#$%^&*?_~]/;
   var UPPERCASE_LOWERCASE_RE = /([a-z].*[A-Z])|([A-Z].*[a-z])/;
   var SYMBOL_RE = /[!@#\$%^&*?_~]/;
-  var PASSWORD_LIMIT = 3000;
-  var USERNAME_LIMIT = 100000;
+  var PASSWORD_LIMIT = 1000;
+  var USERNAME_LIMIT = 50000;
 
   function escapeForRegexp(string) {
     return (string || "").replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
