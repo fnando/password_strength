@@ -22,6 +22,10 @@
   PasswordStrength.fn.test = function() {
     var score;
     this.score = score = 0;
+    if (this.username)
+      this.username = this.username.substr(0, USERNAME_LIMIT);
+    if (this.password)
+      this.password = this.password.substr(0, PASSWORD_LIMIT);
 
     if (this.containInvalidMatches()) {
       this.status = "invalid";
@@ -278,8 +282,8 @@
 
   PasswordStrength.test = function(username, password) {
     var strength = new PasswordStrength();
-    strength.username = username.substr(0, USERNAME_LIMIT);
-    strength.password = password.substr(0, PASSWORD_LIMIT);
+    strength.username = username;
+    strength.password = password;
     strength.test();
     return strength;
   };
