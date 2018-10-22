@@ -79,6 +79,20 @@ QUnit.test("test strong password", function(assert) {
   assert.equal(strength.status, "strong");
 });
 
+QUnit.test("test truncate long password", function(assert) {
+  strength.password = "a".repeat(5000);
+  assert.equal(strength.password.length, 5000);
+  strength.test();
+  assert.equal(strength.password.length, 1000);
+});
+
+QUnit.test("test truncate long username", function(assert) {
+  strength.username = "a".repeat(100000);
+  assert.equal(strength.username.length, 100000);
+  strength.test();
+  assert.equal(strength.username.length, 50000);
+});
+
 QUnit.test("test weak password", function(assert) {
   strength.password = "ytrewq";
   strength.test()
@@ -251,8 +265,6 @@ QUnit.test("reject long passwords using same character", function(assert) {
     strength.password = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     strength.test();
     assert.equal(strength.status, "invalid");
-    // assert @strength.invalid?
-    // refute @strength.valid?
 });
 
 QUnit.module("PasswordStrength: jQuery integration", {

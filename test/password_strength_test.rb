@@ -3,6 +3,13 @@ require "test_helper"
 class TestPasswordStrength < Minitest::Test
   def setup
     @strength = PasswordStrength::Base.new("johndoe", "mypass")
+    @password_limit = PasswordStrength::Base.const_get(:PASSWORD_LIMIT)
+    @username_limit = PasswordStrength::Base.const_get(:USERNAME_LIMIT)
+  end
+
+  def teardown
+    set_const(:PASSWORD_LIMIT, @password_limit)
+    set_const(:USERNAME_LIMIT, @username_limit)
   end
 
   def test_shortcut
@@ -256,12 +263,35 @@ class TestPasswordStrength < Minitest::Test
   end
 
   def test_reject_common_words
-    $BREAKPOINT = true
     password = PasswordStrength::Base.common_words.first
     @strength = PasswordStrength.test("johndoe", password)
     assert @strength.invalid?, "#{password} must be invalid"
     refute @strength.valid?
     assert_equal :invalid, @strength.status
-    $BREAKPOINT = false
+  end
+
+  def test_long_passwords_same_as_truncated
+    set_const(:PASSWORD_LIMIT, 20)
+    strength_20 = PasswordStrength.test("johndoe", "ab"*10)
+    strength_200 = PasswordStrength.test("johndoe", "ab"*100)
+    assert strength_20.score == strength_200.score
+    assert strength_20.password == strength_200.password
+    assert strength_20.username == strength_200.username
+    assert strength_20.status == strength_200.status
+  end
+
+  def test_long_usernames_same_as_truncatedd
+    set_const(:USERNAME_LIMIT, 20)
+    strength_20 = PasswordStrength.test("ab"*10, "^Str0ng P4ssw0rd$")
+    strength_200 = PasswordStrength.test("ab"*100, "^Str0ng P4ssw0rd$")
+    assert strength_20.score == strength_200.score
+    assert strength_20.password == strength_200.password
+    assert strength_20.username == strength_200.username
+    assert strength_20.status == strength_200.status
+  end
+
+  def set_const(const, value)
+    PasswordStrength::Base.send(:remove_const, const)
+    PasswordStrength::Base.const_set(const, value)
   end
 end
