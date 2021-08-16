@@ -12,7 +12,7 @@ module ActiveModel # :nodoc:
           :record => record
         )
         strength.test
-        record.errors.add(attribute, :too_weak, options) unless PasswordStrength.enabled && strength.valid?(level(record))
+        record.errors.add(attribute, :too_weak, **options) unless PasswordStrength.enabled && strength.valid?(level(record))
       end
 
       def check_validity!
